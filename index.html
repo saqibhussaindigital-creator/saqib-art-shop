@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saqib — The Artist | Art Shop</title>
+  <meta name="description" content="Original art prints, commissions and drawing lessons by Saqib — The Artist. Home of Pip & Inky." />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top">
+      <img src="images/logo.png" alt="Saqib The Artist logo" class="brand-logo" />
+      <span class="brand-text"><strong>SAQIB</strong><em>THE ARTIST</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">✦ Original artwork &amp; commissions ✦</p>
+        <h1>Art that makes<br />you <span class="gold">smile.</span></h1>
+        <p class="lede">Hand-crafted prints, custom portraits and drawing lessons by <strong>Saqib — The Artist</strong>, creator of the beloved characters <strong>Pip &amp; Inky</strong>.</p>
+        <div class="hero-cta">
+          <a href="#shop" class="btn btn-gold">Shop prints</a>
+          <a href="#contact" class="btn btn-outline">Commission me</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>19.8K</strong><span>TikTok followers</span></div>
+          <div><strong>253K</strong><span>likes &amp; counting</span></div>
+          <div><strong>100%</strong><span>hand-made with love</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="images/pip-inky-lineup.webp" alt="Pip and Inky, original characters by Saqib" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHOP ============ -->
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <p class="eyebrow">✦ The collection ✦</p>
+      <h2>Shop the <span class="gold">art</span></h2>
+      <p class="section-sub">Every print is made to order. Add pieces to your cart, then check out with a single tap.</p>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PIP & INKY STRIP ============ -->
+  <section class="characters">
+    <div class="wrap chars-inner">
+      <img src="images/pip-inky-studio.webp" alt="Pip and Inky debating in the art studio" />
+      <div>
+        <p class="eyebrow">✦ Meet the muses ✦</p>
+        <h2>Pip <span class="gold">&amp;</span> Inky</h2>
+        <p><strong>Pip</strong> — the dramatic little painter in the beret.<br />
+        <strong>Inky</strong> — the sassy sketch artist with the pink bow.</p>
+        <p>Together they star in Saqib's viral character series. Bring them home as prints, stickers and more.</p>
+        <a href="#shop" class="btn btn-gold">See Pip &amp; Inky prints</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="wrap about-inner">
+      <div>
+        <p class="eyebrow">✦ The artist ✦</p>
+        <h2>Hi, I'm <span class="gold">Saqib.</span></h2>
+        <p>I'm an artist and drawing teacher based in Pakistan, sharing my love of art with thousands of students online and at the University of Malakand.</p>
+        <p>My work blends classic drawing craft with playful original characters — art that's serious about skill, but never too serious to make you smile.</p>
+        <ul class="about-list">
+          <li>🎨 Drawing teacher &amp; content creator</li>
+          <li>🎓 Teaching at University of Malakand</li>
+          <li>📱 <a href="https://www.tiktok.com/@curioussaqibartist" target="_blank" rel="noopener">@curioussaqibartist</a> on TikTok</li>
+        </ul>
+      </div>
+      <img src="images/pip-closeup.webp" alt="Pip close-up artwork by Saqib" />
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-inner">
+      <p class="eyebrow">✦ Commissions &amp; orders ✦</p>
+      <h2>Let's make something <span class="gold">together.</span></h2>
+      <p class="section-sub">Custom portraits, character art, brand illustrations or a private drawing lesson — send me a message and we'll sketch out the idea.</p>
+      <div class="contact-cards">
+        <a class="contact-card" href="https://www.tiktok.com/@curioussaqibartist" target="_blank" rel="noopener">
+          <span class="cc-icon">📱</span>
+          <strong>TikTok DM</strong>
+          <span>@curioussaqibartist</span>
+        </a>
+        <button class="contact-card" id="orderViaCart">
+          <span class="cc-icon">🛒</span>
+          <strong>Order from cart</strong>
+          <span>Check out in one tap</span>
+        </button>
+      </div>
+      <p class="fine-print">Payments &amp; delivery details are confirmed over DM. Prints ship across Pakistan.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <span><strong>SAQIB</strong> · THE ARTIST</span>
+      <span>© 2026 Saqib — The Artist. All artwork original.</span>
+    </div>
+  </footer>
+
+  <!-- ============ CART DRAWER ============ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-head">
+      <h3>Your cart</h3>
+      <button id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">Rs 0</strong></div>
+      <button class="btn btn-gold btn-block" id="checkoutBtn">Order via TikTok DM</button>
+      <p class="fine-print">We'll open my TikTok profile — just paste your order into a DM.</p>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
