@@ -28,6 +28,8 @@ python3 -m http.server 8080
 
 This is a static site — deploy anywhere (Vercel, Netlify, GitHub Pages). On Vercel, import this repo and ship it; no build step needed.
 
+> **Note:** `images/*.webp` are stored as **base64 text**, not binary — the GitHub App API used to publish this repo can't push binary files. `app.js` fetches and decodes them to real images at runtime, so the site works normally.
+
 ## Ordering
 
 Orders are taken via TikTok DM: [@curioussaqibartist](https://www.tiktok.com/@curioussaqibartist). Payment & delivery details are confirmed in chat.

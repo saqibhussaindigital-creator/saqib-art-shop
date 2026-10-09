@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saqib — The Artist | Art Shop</title>
   <meta name="description" content="Original art prints, commissions and drawing lessons by Saqib — The Artist. Home of Pip & Inky." />
-  <link rel="icon" type="image/png" href="images/logo.webp" />
+  <link rel="icon" href="images/logo.webp" />
+  <!-- NOTE: images/*.webp are stored as base64 text (GitHub App API can't push binary);
+       app.js decodes them to images at runtime. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,7 +18,7 @@
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <a class="brand" href="#top">
-      <img src="images/logo.webp" alt="Saqib The Artist logo" class="brand-logo" />
+      <img data-b64img="images/logo.webp" alt="Saqib The Artist logo" class="brand-logo" />
       <span class="brand-text"><strong>SAQIB</strong><em>THE ARTIST</em></span>
     </a>
     <nav class="nav-links">
@@ -47,7 +49,7 @@
         </div>
       </div>
       <div class="hero-art">
-        <img src="images/pip-inky-lineup.webp" alt="Pip and Inky, original characters by Saqib" />
+        <img data-b64img="images/pip-inky-lineup.webp" alt="Pip and Inky, original characters by Saqib" />
       </div>
     </div>
   </section>
@@ -65,7 +67,7 @@
   <!-- ============ PIP & INKY STRIP ============ -->
   <section class="characters">
     <div class="wrap chars-inner">
-      <img src="images/pip-inky-studio.webp" alt="Pip and Inky debating in the art studio" />
+      <img data-b64img="images/pip-inky-studio.webp" alt="Pip and Inky debating in the art studio" />
       <div>
         <p class="eyebrow">✦ Meet the muses ✦</p>
         <h2>Pip <span class="gold">&amp;</span> Inky</h2>
@@ -91,7 +93,7 @@
           <li>📱 <a href="https://www.tiktok.com/@curioussaqibartist" target="_blank" rel="noopener">@curioussaqibartist</a> on TikTok</li>
         </ul>
       </div>
-      <img src="images/pip-closeup.webp" alt="Pip close-up artwork by Saqib" />
+      <img data-b64img="images/pip-closeup.webp" alt="Pip close-up artwork by Saqib" />
     </div>
   </section>
 

@@ -55,6 +55,19 @@ const PRODUCTS = [
 const TIKTOK_URL = 'https://www.tiktok.com/@curioussaqibartist';
 const fmt = (n) => 'Rs ' + n.toLocaleString('en-PK');
 
+// Images are stored in the repo as base64 text (the GitHub App API can't push
+// binary), so we decode them to object URLs at runtime.
+const artCache = {};
+async function artURL(path) {
+  if (artCache[path]) return artCache[path];
+  const b64 = (await (await fetch(path)).text()).trim();
+  const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  const url = URL.createObjectURL(new Blob([bin], { type: 'image/webp' }));
+  artCache[path] = url;
+  return url;
+}
+const art = (path) => artCache[path] || path;
+
 let cart = {};
 try {
   cart = JSON.parse(localStorage.getItem('saqib-cart') || '{}');
@@ -82,7 +95,7 @@ function cartTotal() {
 function renderProducts() {
   $('productGrid').innerHTML = PRODUCTS.map((p) => `
     <article class="card">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" />
+      <img src="${art(p.img)}" alt="${p.name}" loading="lazy" />
       <div class="card-body">
         <span class="card-tag">${p.tag}</span>
         <h3>${p.name}</h3>
@@ -111,7 +124,7 @@ function renderCart() {
     if (!p) return '';
     return `
       <div class="cart-item">
-        <img src="${p.img}" alt="${p.name}" />
+        <img src="${art(p.img)}" alt="${p.name}" />
         <div class="cart-item-info">
           <strong>${p.name}</strong>
           <span>${fmt(p.price)} each</span>
@@ -169,29 +182,46 @@ function checkout() {
   setTimeout(() => window.open(TIKTOK_URL, '_blank', 'noopener'), 900);
 }
 
-document.addEventListener('click', (e) => {
-  const add = e.target.closest('[data-add]');
-  const inc = e.target.closest('[data-inc]');
-  const dec = e.target.closest('[data-dec]');
-  if (add) { addToCart(add.dataset.add); return; }
-  if (inc) { cart[inc.dataset.inc]++; saveCart(); renderCart(); return; }
-  if (dec) {
-    const id = dec.dataset.dec;
-    cart[id]--;
-    if (cart[id] <= 0) delete cart[id];
-    saveCart(); renderCart(); return;
-  }
-});
+function bindEvents() {
+  document.addEventListener('click', (e) => {
+    const add = e.target.closest('[data-add]');
+    const inc = e.target.closest('[data-inc]');
+    const dec = e.target.closest('[data-dec]');
+    if (add) { addToCart(add.dataset.add); return; }
+    if (inc) { cart[inc.dataset.inc]++; saveCart(); renderCart(); return; }
+    if (dec) {
+      const id = dec.dataset.dec;
+      cart[id]--;
+      if (cart[id] <= 0) delete cart[id];
+      saveCart(); renderCart(); return;
+    }
+  });
 
-$('cartOpen').addEventListener('click', openCart);
-$('cartClose').addEventListener('click', closeCart);
-$('cartOverlay').addEventListener('click', closeCart);
-$('checkoutBtn').addEventListener('click', checkout);
-$('orderViaCart').addEventListener('click', () => { renderCart(); openCart(); });
+  $('cartOpen').addEventListener('click', openCart);
+  $('cartClose').addEventListener('click', closeCart);
+  $('cartOverlay').addEventListener('click', closeCart);
+  $('checkoutBtn').addEventListener('click', checkout);
+  $('orderViaCart').addEventListener('click', () => { renderCart(); openCart(); });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeCart();
-});
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCart();
+  });
+}
 
-renderProducts();
-renderCart();
+// Boot: decode artwork first, then render.
+(async function init() {
+  const paths = [...new Set([
+    ...PRODUCTS.map((p) => p.img),
+    ...[...document.querySelectorAll('img[data-b64img]')].map((el) => el.getAttribute('data-b64img')),
+  ])];
+  await Promise.all(paths.map((p) => artURL(p).catch(() => null)));
+  document.querySelectorAll('img[data-b64img]').forEach((el) => {
+    const u = art(el.getAttribute('data-b64img'));
+    if (u) el.src = u;
+  });
+  const icon = document.querySelector('link[rel="icon"]');
+  if (icon && artCache['images/logo.webp']) icon.href = artCache['images/logo.webp'];
+  bindEvents();
+  renderProducts();
+  renderCart();
+})();
